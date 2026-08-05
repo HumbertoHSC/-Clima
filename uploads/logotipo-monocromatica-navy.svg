@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 120" width="920" height="240">
-  <g transform="translate(10,10)">
-    <rect x="42" y="8" width="16" height="84" rx="3" fill="#14335A"></rect>
-    <rect x="8" y="42" width="84" height="16" rx="3" fill="#14335A"></rect>
-    <rect x="45" y="8" width="10" height="84" rx="3" transform="rotate(45 50 50)" fill="#14335A"></rect>
-    <rect x="45" y="8" width="10" height="84" rx="3" transform="rotate(-45 50 50)" fill="#14335A"></rect></g>
-  <text x="140" y="85" font-size="68" fill="#14335A">clima</text>
-</svg>
