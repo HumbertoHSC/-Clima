@@ -95,7 +95,7 @@ const jsonLd = {
     "Água Preta-PE",
     "Mata Sul de Pernambuco",
   ],
-  telephone: "+55-81-99999-9999",
+  telephone: "+55-81-7302-3718",
   priceRange: "$$",
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",

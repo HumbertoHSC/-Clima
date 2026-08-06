@@ -21,18 +21,18 @@ export function About() {
           </div>
         </motion.div>
 
-        <Reveal className="min-w-[300px] flex-1 basis-[420px]" y={30}>
+        <Reveal className="min-w-[300px] flex-1 basis-[420px] text-center" y={30}>
           <span className="mb-3 inline-block text-[0.8rem] font-bold uppercase tracking-wide text-blue">
             Sobre a +Clima
           </span>
           <h2 className="font-head mb-4 text-[clamp(1.7rem,3.2vw,2.5rem)] font-extrabold text-navy">
             Quem cuida do seu ar-condicionado em Tamandaré e na Mata Sul de PE
           </h2>
-          <p className="mb-4 text-[1.03rem] leading-relaxed text-text-soft">
+          <p className="mx-auto mb-4 max-w-[520px] text-[1.03rem] leading-relaxed text-text-soft">
             A +Clima nasceu para levar atendimento próximo e técnico para quem precisa de conforto térmico de
             verdade — sem enrolação e sem letras miúdas no orçamento.
           </p>
-          <p className="text-[1.03rem] leading-relaxed text-text-soft">
+          <p className="mx-auto max-w-[520px] text-[1.03rem] leading-relaxed text-text-soft">
             Nossa equipe é treinada, educada e trabalha com equipamentos calibrados, atendendo residências,
             escritórios e comércios em toda a região.
           </p>

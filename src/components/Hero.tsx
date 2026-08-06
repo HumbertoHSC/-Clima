@@ -21,7 +21,7 @@ export function Hero() {
     <section id="topo" className="pt-10 pb-8 sm:pt-14">
       <div className="mx-auto flex max-w-[1240px] flex-wrap items-center gap-12 px-5">
         <motion.div
-          className="min-w-[300px] flex-1 basis-[420px]"
+          className="min-w-[300px] flex-1 basis-[420px] text-center"
           variants={container}
           initial="hidden"
           animate="visible"
@@ -30,15 +30,14 @@ export function Hero() {
             variants={item}
             className="font-head text-[clamp(2.1rem,4.6vw,3.4rem)] font-extrabold leading-[1.1] text-navy"
           >
-            Conforto térmico que a sua família merece
+            Seu ar-condicionado não gela mais?
           </motion.h1>
 
-          <motion.p variants={item} className="mt-4 max-w-[480px] text-[1.1rem] leading-relaxed text-ink-soft">
-            Instalação, manutenção, higienização e conserto de ar-condicionado em Tamandaré-PE e toda a Mata Sul de
-            Pernambuco. Atendimento próximo e sem enrolação — fala com a gente e resolve ainda hoje.
+          <motion.p variants={item} className="mx-auto mt-4 max-w-[480px] text-[1.1rem] leading-relaxed text-ink-soft">
+            A gente resolve hoje. Instalação, manutenção e conserto em Tamandaré-PE e Mata Sul.
           </motion.p>
 
-          <motion.div variants={item} className="mt-7 flex flex-wrap gap-3">
+          <motion.div variants={item} className="mt-7 flex flex-wrap justify-center gap-3">
             <motion.a
               href={waLink(DEFAULT_WA_MESSAGE)}
               target="_blank"
@@ -47,7 +46,7 @@ export function Hero() {
               whileTap={{ scale: 0.97 }}
               className="inline-flex items-center gap-2 rounded-full bg-cta px-7 py-3.5 text-base font-bold text-white shadow-sm transition-shadow hover:shadow-md"
             >
-              Chamar no WhatsApp <ArrowRight className="h-4 w-4" />
+              Agendar visita <ArrowRight className="h-4 w-4" />
             </motion.a>
             <motion.a
               href="#servicos"
@@ -59,7 +58,7 @@ export function Hero() {
             </motion.a>
           </motion.div>
 
-          <motion.div variants={item} className="mt-9 flex flex-wrap gap-6">
+          <motion.div variants={item} className="mt-9 flex flex-wrap justify-center gap-6">
             {TRUST_POINTS.map((tp) => (
               <div key={tp} className="flex items-center gap-2.5">
                 <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-ice">

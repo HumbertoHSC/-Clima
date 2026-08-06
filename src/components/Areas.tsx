@@ -9,18 +9,18 @@ export function Areas() {
   return (
     <section id="areas" className="mt-[88px] pb-4">
       <div className="mx-auto flex max-w-[1240px] flex-wrap items-center gap-12 px-5">
-        <Reveal className="min-w-[280px] flex-1 basis-[380px]">
+        <Reveal className="min-w-[280px] flex-1 basis-[380px] text-center">
           <span className="mb-3 inline-block text-[0.8rem] font-bold uppercase tracking-wide text-blue">
             Áreas atendidas
           </span>
           <h2 className="font-head mb-3.5 text-[clamp(1.7rem,3.2vw,2.5rem)] font-extrabold text-navy">
             Perto de você, quando você precisa
           </h2>
-          <p className="mb-6 max-w-[460px] text-[1.03rem] leading-relaxed text-text-soft">
+          <p className="mx-auto mb-6 max-w-[460px] text-[1.03rem] leading-relaxed text-text-soft">
             Atendemos residências, escritórios e comércios em Tamandaré-PE e em toda a Mata Sul de Pernambuco — e
             arredores.
           </p>
-          <StaggerGroup className="flex flex-wrap gap-2.5" stagger={0.05}>
+          <StaggerGroup className="flex flex-wrap justify-center gap-2.5" stagger={0.05}>
             {AREAS.map((area) => (
               <StaggerItem key={area}>
                 <span className="rounded-full border border-ice-border bg-ice px-[18px] py-2 text-sm font-semibold text-navy">

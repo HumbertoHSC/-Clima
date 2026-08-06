@@ -2,14 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { List, X, WhatsappLogo } from "@phosphor-icons/react/dist/ssr";
+import { List, X } from "@phosphor-icons/react/dist/ssr";
 import { NAV_LINKS } from "@/lib/data";
 import { waLink, DEFAULT_WA_MESSAGE } from "@/lib/whatsapp";
+import { useMobileMenu } from "./MobileMenuContext";
 
 export function Header() {
-  const [open, setOpen] = useState(false);
+  const { open, setOpen } = useMobileMenu();
 
   return (
     <header className="sticky top-0 z-50 border-b border-header-border bg-bg/95 backdrop-blur-sm">
@@ -32,25 +32,19 @@ export function Header() {
 
         <div className="flex items-center gap-2.5">
           <a
-            href="tel:+5581999999999"
-            className="hidden rounded-full border-[1.5px] border-outline px-[18px] py-2.5 text-sm font-semibold text-navy transition-colors hover:border-navy sm:block"
-          >
-            (81) 99999-9999
-          </a>
-          <a
             href={waLink(DEFAULT_WA_MESSAGE)}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 rounded-full bg-navy px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-navy-dark"
           >
-            <WhatsappLogo weight="fill" className="h-4 w-4 text-accent" />
+            <Image src="/brand/logo-whatsapp.png" alt="" width={18} height={18} className="h-[18px] w-[18px] shrink-0 rounded-full" />
             <span className="hidden sm:inline">Solicitar Orçamento</span>
             <span className="sm:hidden">Orçamento</span>
           </a>
           <button
             aria-label={open ? "Fechar menu" : "Abrir menu"}
             aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
+            onClick={() => setOpen(!open)}
             className="rounded-lg p-2.5 text-navy md:hidden"
           >
             {open ? <X className="h-6 w-6" /> : <List className="h-6 w-6" />}

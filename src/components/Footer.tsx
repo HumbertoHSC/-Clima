@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { InstagramLogo, FacebookLogo, WhatsappLogo } from "@phosphor-icons/react/dist/ssr";
 import { NAV_LINKS } from "@/lib/data";
 import { waLink, DEFAULT_WA_MESSAGE } from "@/lib/whatsapp";
 
@@ -16,9 +15,12 @@ export function Footer() {
             Manutenção, instalação e conserto de ar-condicionado com atendimento próximo — para sua casa ou empresa.
           </p>
           <div className="flex gap-2.5">
-            <SocialLink href="#" label="Instagram" icon={InstagramLogo} />
-            <SocialLink href="#" label="Facebook" icon={FacebookLogo} />
-            <SocialLink href={waLink(DEFAULT_WA_MESSAGE)} label="WhatsApp" icon={WhatsappLogo} />
+            <SocialLink
+              href="https://www.instagram.com/mais_climaa"
+              label="Instagram"
+              iconSrc="/brand/logo-instagram.png"
+            />
+            <SocialLink href={waLink(DEFAULT_WA_MESSAGE)} label="WhatsApp" iconSrc="/brand/logo-whatsapp.png" />
           </div>
         </div>
 
@@ -39,13 +41,9 @@ export function Footer() {
         <div className="basis-[220px]">
           <h4 className="mb-4 text-sm font-bold text-white">Contato</h4>
           <div className="flex flex-col gap-2.5 text-[0.88rem] text-footer-text">
-            <a href={waLink(DEFAULT_WA_MESSAGE)} target="_blank" rel="noopener noreferrer" className="hover:text-white">
-              WhatsApp: (81) 99999-9999
+            <a href="tel:+558173023718" className="hover:text-white">
+              Telefone: (81) 7302-3718
             </a>
-            <a href="mailto:contato@maisclima.com.br" className="hover:text-white">
-              contato@maisclima.com.br
-            </a>
-            <span>Rua Example, 123 – Centro, Tamandaré-PE</span>
             <span>Seg a sáb, 8h às 19h</span>
           </div>
         </div>
@@ -62,11 +60,11 @@ export function Footer() {
 function SocialLink({
   href,
   label,
-  icon: Icon,
+  iconSrc,
 }: {
   href: string;
   label: string;
-  icon: typeof WhatsappLogo;
+  iconSrc: string;
 }) {
   return (
     <a
@@ -74,9 +72,9 @@ function SocialLink({
       target={href.startsWith("http") ? "_blank" : undefined}
       rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
       aria-label={label}
-      className="flex h-9 w-9 items-center justify-center rounded-full bg-white/8 text-social-icon transition-colors hover:bg-cta hover:text-white"
+      className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-white transition-opacity hover:opacity-80"
     >
-      <Icon weight="fill" className="h-4 w-4" />
+      <Image src={iconSrc} alt="" width={20} height={20} className="h-5 w-5 object-contain" />
     </a>
   );
 }

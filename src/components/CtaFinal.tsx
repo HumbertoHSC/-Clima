@@ -13,7 +13,7 @@ export function CtaFinal() {
             Conforto que dá pra confiar
           </h2>
           <p className="mb-7 text-[1.05rem] leading-relaxed text-ink-pale">
-            Chama a gente no WhatsApp e recebe uma resposta rápida, sem robô e sem enrolação.
+            Resposta rápida, sem robô e sem enrolação.
           </p>
           <motion.a
             href={waLink(DEFAULT_WA_MESSAGE)}
@@ -25,6 +25,9 @@ export function CtaFinal() {
           >
             Chamar no WhatsApp
           </motion.a>
+          <a href="tel:+558173023718" className="mt-4 block text-[0.95rem] font-semibold text-ink-pale hover:text-white">
+            ou ligue: (81) 7302-3718
+          </a>
         </Reveal>
       </div>
     </section>
