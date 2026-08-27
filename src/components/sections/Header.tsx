@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import {
   AnimatePresence,
   motion,
@@ -10,7 +11,6 @@ import {
 import { NAV_LINKS, BUSINESS } from "@/lib/site";
 import { waLink, MESSAGES } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
-import { Logo } from "@/components/ui/Logo";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { IconPlus } from "@/components/ui/Icons";
 import { useScrollLock } from "@/components/providers/SmoothScroll";
@@ -67,8 +67,15 @@ export function Header() {
           )}
         >
           <div className="mx-auto flex h-[72px] max-w-[1440px] items-center justify-between gap-6 px-5 sm:px-8">
-            <a href="#topo" aria-label={`${BUSINESS.legalName} — ir para o topo`}>
-              <Logo compact />
+            <a href="#topo" aria-label={`${BUSINESS.legalName} — ir para o topo`} className="shrink-0">
+              <Image
+                src="/brand/lockup-navbar.jpg"
+                alt={`${BUSINESS.legalName}`}
+                width={808}
+                height={380}
+                priority
+                className="h-9 w-auto rounded-sm sm:h-10"
+              />
             </a>
 
             <nav aria-label="Principal" className="hidden items-center gap-1 lg:flex">

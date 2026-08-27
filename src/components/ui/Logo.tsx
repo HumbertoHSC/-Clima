@@ -36,31 +36,3 @@ export function LogoMark({ className }: { className?: string }) {
     </svg>
   );
 }
-
-/** Lockup horizontal: marca + tipo. */
-export function Logo({
-  className,
-  compact = false,
-}: {
-  className?: string;
-  compact?: boolean;
-}) {
-  return (
-    <span className={cn("flex items-center gap-2.5", className)}>
-      <LogoMark className={cn("text-ice", compact ? "h-7 w-7" : "h-9 w-9")} />
-      <span className="flex flex-col leading-none">
-        <span
-          className={cn(
-            "u-expanded font-bold tracking-tight text-white-warm",
-            compact ? "text-lg" : "text-xl",
-          )}
-        >
-          Clima
-        </span>
-        {!compact && (
-          <span className="u-tag mt-1 text-[0.55rem] text-fog">Refrigeração</span>
-        )}
-      </span>
-    </span>
-  );
-}
