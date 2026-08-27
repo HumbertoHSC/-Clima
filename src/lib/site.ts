@@ -12,6 +12,7 @@ export const BUSINESS = {
   phoneRaw: "+5581973023718",
   whatsapp: "5581973023718",
   email: "contato@maisclimatamandare.com.br",
+  street: "Avenida José Bezerra Sobrinho, S/N, Centro",
   city: "Tamandaré",
   state: "PE",
   postalCode: "55578-000",

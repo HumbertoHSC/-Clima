@@ -124,23 +124,26 @@ Dois blocos de JSON-LD em `src/app/layout.tsx`:
 - **`FAQPage`** — as mesmas perguntas do acordeão (`FAQS`), para o Google poder
   responder direto no resultado de busca em vez de só linkar a página.
 
-Nenhum dos dois substitui o **Google Business Profile** — para aparecer no mapa
-local ("manutenção de ar condicionado perto de mim", pacote de 3 resultados no
-Maps) é preciso reivindicar/criar o perfil da +Clima no Google, com o mesmo
-nome, telefone e horário daqui, e reunir avaliações reais de clientes. Isso não
-é algo que o código resolve sozinho.
+O endereço completo já está em `BUSINESS` (`src/lib/site.ts`): Avenida José
+Bezerra Sobrinho, S/N, Centro, Tamandaré-PE, CEP 55578-000. Ele aparece tanto
+no JSON-LD quanto visível na página (footer e seção de contato) — Google
+confia mais num negócio local quando o endereço bate em todos os lugares onde
+aparece, então **o Google Business Profile precisa usar exatamente este mesmo
+endereço, nome e telefone**.
+
+Nenhum dos dois blocos de JSON-LD substitui o **Google Business Profile** — para
+aparecer no mapa local ("manutenção de ar condicionado perto de mim", pacote de
+3 resultados no Maps) é preciso reivindicar/criar o perfil da +Clima no Google
+e reunir avaliações reais de clientes. Isso não é algo que o código resolve
+sozinho.
 
 ## Antes de publicar
 
 1. Conferir o `@` do Instagram em `BUSINESS.instagram` (`src/lib/site.ts`).
 2. Apontar o DNS de `maisclimatamandare.com.br` para o projeto na Vercel.
-3. Preencher rua e número em `BUSINESS.postalCode`/JSON-LD (`src/lib/site.ts` e
-   `src/app/layout.tsx`) — hoje o endereço tem CEP (55578-000), cidade e
-   estado reais, mas sem rua e número, para não publicar algo inventado. Sem
-   isso o Google tem menos confiança para mostrar o negócio no mapa local.
-4. Substituir as fotos da galeria pelas reais.
-5. Confirmar as condições da promoção em `PROMO` (aparelhos cobertos, limite de
+3. Substituir as fotos da galeria pelas reais.
+4. Confirmar as condições da promoção em `PROMO` (aparelhos cobertos, limite de
    BTU, se o valor muda fora de Tamandaré).
-6. Criar/reivindicar o Google Business Profile e verificar o site no Google
-   Search Console (envie o sitemap em `/sitemap.xml`) assim que o domínio
-   estiver no ar.
+5. Criar/reivindicar o Google Business Profile com o mesmo nome, endereço e
+   telefone de `BUSINESS`, e verificar o site no Google Search Console
+   (envie o sitemap em `/sitemap.xml`) assim que o domínio estiver no ar.

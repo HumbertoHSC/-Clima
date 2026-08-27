@@ -3,8 +3,9 @@ import { BUSINESS, NAV_LINKS, SERVICES, AREAS } from "@/lib/site";
 import { waLink, MESSAGES } from "@/lib/whatsapp";
 import { IconInstagram, IconWhatsApp, IconArrow } from "@/components/ui/Icons";
 
-const MAPS_URL =
-  "https://www.google.com/maps/search/?api=1&query=Tamandar%C3%A9%2C+PE";
+const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+  `${BUSINESS.street}, ${BUSINESS.base}`,
+)}`;
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -123,10 +124,13 @@ export function Footer() {
                   href={MAPS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 text-chalk transition-colors hover:text-ice"
+                  className="group inline-flex items-start gap-2 text-chalk transition-colors hover:text-ice"
                 >
-                  Base em {BUSINESS.base}
-                  <span className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                  <span>
+                    {BUSINESS.street}
+                    <span className="block text-fog">{BUSINESS.base}</span>
+                  </span>
+                  <span className="mt-1 h-3.5 w-3.5 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                     <IconArrow />
                   </span>
                 </a>

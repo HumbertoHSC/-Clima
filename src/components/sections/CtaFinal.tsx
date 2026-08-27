@@ -86,8 +86,9 @@ export function CtaFinal() {
             <div className="bg-ink-2 px-5 py-5">
               <span className="u-tag block text-fog">Base</span>
               <span className="mt-1.5 block text-[0.98rem] text-chalk">
-                {BUSINESS.base}
+                {BUSINESS.street}
               </span>
+              <span className="u-tag mt-1 block text-fog/70">{BUSINESS.base}</span>
             </div>
           </Reveal>
         </div>

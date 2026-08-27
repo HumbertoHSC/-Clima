@@ -88,10 +88,9 @@ const jsonLd = {
   description:
     "Instalação, conserto, manutenção preventiva, higienização e carga de gás de ar-condicionado em Tamandaré-PE e Mata Sul de Pernambuco.",
   telephone: BUSINESS.phoneRaw,
-  // Rua e número seguem de fora de propósito: só entram quando o cliente
-  // confirmar o endereço exato. CEP, localidade e estado já são reais.
   address: {
     "@type": "PostalAddress",
+    streetAddress: BUSINESS.street,
     postalCode: BUSINESS.postalCode,
     addressLocality: BUSINESS.city,
     addressRegion: BUSINESS.state,
