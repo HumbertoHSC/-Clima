@@ -111,12 +111,36 @@ As fotos nunca aparecem cruas: recebem dessaturação, camada de cor fria em
 > material como moldura. Assim que houver fotos reais de atendimentos, basta
 > trocar o campo `src` de cada item — as legendas já descrevem os serviços.
 
+## SEO e busca local
+
+O domínio real é `maisclimatamandare.com.br` (`BUSINESS.url` em `src/lib/site.ts`)
+— aponte o DNS para a Vercel antes de divulgar o link, senão canonical, Open
+Graph e sitemap continuam corretos no código mas o link público não resolve.
+
+Dois blocos de JSON-LD em `src/app/layout.tsx`:
+
+- **`HVACBusiness`** — nome, telefone, área de atuação (`AREAS`), horário e o
+  catálogo de serviços (`hasOfferCatalog`, gerado a partir de `SERVICES`).
+- **`FAQPage`** — as mesmas perguntas do acordeão (`FAQS`), para o Google poder
+  responder direto no resultado de busca em vez de só linkar a página.
+
+Nenhum dos dois substitui o **Google Business Profile** — para aparecer no mapa
+local ("manutenção de ar condicionado perto de mim", pacote de 3 resultados no
+Maps) é preciso reivindicar/criar o perfil da +Clima no Google, com o mesmo
+nome, telefone e horário daqui, e reunir avaliações reais de clientes. Isso não
+é algo que o código resolve sozinho.
+
 ## Antes de publicar
 
 1. Conferir o `@` do Instagram em `BUSINESS.instagram` (`src/lib/site.ts`).
-2. Trocar `BUSINESS.url` pelo domínio real (usado em canonical, OG e sitemap).
+2. Apontar o DNS de `maisclimatamandare.com.br` para o projeto na Vercel.
 3. Preencher rua e número no JSON-LD de `src/app/layout.tsx` — hoje só constam
    cidade, estado e área de atuação, para não publicar endereço inventado.
+   Sem rua e número, o Google tem menos confiança para mostrar o negócio no
+   mapa local.
 4. Substituir as fotos da galeria pelas reais.
 5. Confirmar as condições da promoção em `PROMO` (aparelhos cobertos, limite de
    BTU, se o valor muda fora de Tamandaré).
+6. Criar/reivindicar o Google Business Profile e verificar o site no Google
+   Search Console (envie o sitemap em `/sitemap.xml`) assim que o domínio
+   estiver no ar.

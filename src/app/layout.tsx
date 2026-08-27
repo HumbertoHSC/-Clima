@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, Public_Sans, JetBrains_Mono } from "next/font/google";
-import { BUSINESS, AREAS } from "@/lib/site";
+import { BUSINESS, AREAS, FAQS, SERVICES } from "@/lib/site";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import "./globals.css";
 
@@ -115,6 +115,32 @@ const jsonLd = {
   ],
   priceRange: "$$",
   sameAs: [BUSINESS.instagram],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Serviços de ar-condicionado",
+    itemListElement: SERVICES.map((service) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: service.title,
+        description: service.desc,
+      },
+    })),
+  },
+};
+
+/**
+ * FAQPage — cada pergunta já existe em FAQS (mesmo conteúdo do acordeão),
+ * para o Google poder responder direto no resultado de busca.
+ */
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map((faq) => ({
+    "@type": "Question",
+    name: faq.q,
+    acceptedAnswer: { "@type": "Answer", text: faq.a },
+  })),
 };
 
 export default function RootLayout({
@@ -135,6 +161,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
         <a
           href="#conteudo"
