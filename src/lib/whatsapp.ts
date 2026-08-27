@@ -1,8 +1,20 @@
-export const WHATSAPP_NUMBER = "558173023718";
+import { BUSINESS } from "./site";
 
-export function waLink(message: string): string {
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+/** Monta o deep link do WhatsApp com a mensagem já escrita. */
+export function waLink(message: string = DEFAULT_MESSAGE): string {
+  return `https://wa.me/${BUSINESS.whatsapp}?text=${encodeURIComponent(message)}`;
 }
 
-export const DEFAULT_WA_MESSAGE =
-  "Olá! Vim pelo site e gostaria de solicitar um orçamento.";
+export const DEFAULT_MESSAGE =
+  "Olá! Vim pelo site da +Clima e quero um orçamento.";
+
+export const MESSAGES = {
+  orcamento: DEFAULT_MESSAGE,
+  urgente:
+    "Olá! Meu ar-condicionado parou de gelar e preciso de atendimento com urgência.",
+  servico: (servico: string) =>
+    `Olá! Vim pelo site da +Clima e quero um orçamento de ${servico.toLowerCase()}.`,
+  promo:
+    "Olá! Vi no site a promoção de limpeza de split a partir de R$ 100 e quero agendar.",
+} as const;
+

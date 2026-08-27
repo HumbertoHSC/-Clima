@@ -1,36 +1,122 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# +Clima Refrigeração — landing page
 
-## Getting Started
-
-First, run the development server:
+Landing page de conversão para a **+Clima Refrigeração**, de Tamandaré-PE:
+instalação, conserto, manutenção, higienização e carga de gás de ar-condicionado
+em toda a Mata Sul de Pernambuco.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # build de produção
+npm start        # sobe o build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Camada           | Escolha                                                        |
+| ---------------- | -------------------------------------------------------------- |
+| Framework        | Next.js 15 (App Router) + React 19 + TypeScript                  |
+| Estilo           | Tailwind CSS v4 com tokens próprios (`src/app/globals.css`)      |
+| Animação de cena | GSAP 3 + ScrollTrigger (reveal, parallax, timeline do processo)  |
+| Animação de UI   | Framer Motion (menu, acordeão, carrossel, lightbox)              |
+| Rolagem          | Lenis, sincronizado ao ticker do GSAP                            |
+| Tipografia       | Archivo (eixo `wdth`), Public Sans, JetBrains Mono via next/font |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Sistema de design
 
-## Learn More
+Tudo vive em `@theme` no `globals.css` — não há cor padrão do Tailwind na
+interface.
 
-To learn more about Next.js, take a look at the following resources:
+- **Base** grafite/antracite (`--color-ink`, `--color-ink-2`…)
+- **Frio** azul-gelo saturado (`--color-ice`), usado com moderação
+- **Quente** laranja queimado (`--color-ember`) como contraponto e cor de ação
+- **Papel** (`--color-paper`) na faixa de números, para quebrar o ritmo escuro
+- Texturas utilitárias: `u-noise` (grão), `u-blueprint` (grid técnico),
+  `u-grille` (lâminas de ventilação), `u-tag` (etiqueta monoespaçada),
+  `u-expanded` / `u-condensed` (eixo de largura da Archivo)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Cantos são chanfrados (`clip-path`), não arredondados; divisores são fios de
+1px; os ícones são SVG desenhados à mão em `src/components/ui/Icons.tsx`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Estrutura
 
-## Deploy on Vercel
+```
+src/
+├── app/                  layout, página, metadata, sitemap, robots, OG image
+├── components/
+│   ├── sections/         Header, Hero, Promo, Differentials, Services,
+│   │                     Process, Stats, Gallery, Faq, CtaFinal, Footer
+│   ├── motion/           Reveal, Stagger, Parallax, Counter
+│   ├── providers/        SmoothScroll (Lenis + GSAP + trava de rolagem)
+│   └── ui/               Logo, Icons, MagneticButton, Marquee, SectionHeading,
+│                         Preloader, WhatsAppFloat
+├── hooks/                useMediaQuery / usePrefersReducedMotion / useIsDesktop
+└── lib/                  site.ts (conteúdo), whatsapp.ts, utils.ts
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Todo o texto do site está em `src/lib/site.ts`.** Para trocar o valor da
+promoção (`PROMO`), telefone, cidades atendidas ou perguntas do FAQ, mexa só
+nesse arquivo.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+A promoção aparece em quatro pontos, todos alimentados por `PROMO`: ficha no
+hero, fita do preço na faixa laranja, a própria faixa logo abaixo do hero e o
+lembrete no fechamento. O FAQ também cita o valor.
+
+## Movimento
+
+- Entrada do hero coreografada: palavras sobem de dentro de máscaras, a foto é
+  revelada por `clip-path` animado e as fichas técnicas entram em cascata.
+- Reveal por seção com tempos variados (`Reveal`, `Stagger`).
+- Parallax por scrub só em telas ≥768px — no mobile o custo não compensa.
+- Linha do tempo do processo presa ao scroll: o trilho se preenche e cada etapa
+  acende ao entrar na altura de leitura.
+- Contadores, marquees, botões magnéticos, acordeão com altura animada,
+  carrossel com arraste e inércia, lightbox com transição compartilhada.
+
+### Acessibilidade e `prefers-reduced-motion`
+
+Quando o sistema pede menos movimento:
+
+- o Lenis **não é iniciado** (rolagem nativa);
+- as timelines do GSAP são desligadas por `gsap.matchMedia()`;
+- o Framer Motion segue a preferência via `<MotionConfig reducedMotion="user">`;
+- o preloader é pulado;
+- uma regra em `globals.css` devolve `opacity: 1` a tudo que nasce invisível —
+  e um `<noscript>` faz o mesmo quando não há JavaScript.
+
+Também: navegação por teclado com foco visível, `aria-expanded`/`aria-controls`
+no menu e no FAQ, diálogo do lightbox com foco gerenciado e `Esc`, link de
+"pular para o conteúdo", alt em todas as imagens de conteúdo.
+
+## Contato
+
+A página não tem formulário: todo chamado sai por WhatsApp com a mensagem já
+escrita (`src/lib/whatsapp.ts`) ou por telefone. Cada serviço, a promoção e o
+botão flutuante abrem a conversa com um texto próprio, para o atendimento já
+saber do que se trata.
+
+## Imagens
+
+`scripts/prepare-images.mjs` recorta o material de divulgação da marca (os dois
+JPEGs na raiz do projeto) em `public/images` e `public/brand` usando sharp:
+
+```bash
+node scripts/prepare-images.mjs
+```
+
+As fotos nunca aparecem cruas: recebem dessaturação, camada de cor fria em
+`mix-blend-color`, grelha e vinheta.
+
+> **Pendência do cliente:** a galeria (`GALLERY` em `src/lib/site.ts`) usa esse
+> material como moldura. Assim que houver fotos reais de atendimentos, basta
+> trocar o campo `src` de cada item — as legendas já descrevem os serviços.
+
+## Antes de publicar
+
+1. Conferir o `@` do Instagram em `BUSINESS.instagram` (`src/lib/site.ts`).
+2. Trocar `BUSINESS.url` pelo domínio real (usado em canonical, OG e sitemap).
+3. Preencher rua e número no JSON-LD de `src/app/layout.tsx` — hoje só constam
+   cidade, estado e área de atuação, para não publicar endereço inventado.
+4. Substituir as fotos da galeria pelas reais.
+5. Confirmar as condições da promoção em `PROMO` (aparelhos cobertos, limite de
+   BTU, se o valor muda fora de Tamandaré).

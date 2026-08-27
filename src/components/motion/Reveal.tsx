@@ -1,80 +1,157 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
-import type { ReactNode } from "react";
+import { useLayoutEffect, useRef, type ElementType, type ReactNode } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { cn } from "@/lib/utils";
 
 type RevealProps = {
   children: ReactNode;
   className?: string;
-  delay?: number;
+  /** deslocamento vertical inicial, em px */
   y?: number;
-  as?: "div" | "span";
+  /** escala inicial — use com parcimônia, some elementos ficam moles */
+  scale?: number;
+  delay?: number;
+  duration?: number;
+  start?: string;
+  as?: ElementType;
 };
 
-const makeVariants = (y: number): Variants => ({
-  hidden: { opacity: 0, y },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
-  },
-});
+/**
+ * Revelação no scroll com GSAP/ScrollTrigger.
+ * O elemento nasce invisível no HTML e o CSS devolve a visibilidade
+ * quando não há JS ou quando o sistema pede menos movimento.
+ */
+export function Reveal({
+  children,
+  className,
+  y = 34,
+  scale,
+  delay = 0,
+  duration = 1,
+  start = "top 86%",
+  as: Tag = "div",
+}: RevealProps) {
+  const ref = useRef<HTMLElement>(null);
 
-export function Reveal({ children, className, delay = 0, y = 24 }: RevealProps) {
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    const mm = gsap.matchMedia();
+
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      gsap.fromTo(
+        el,
+        { opacity: 0, y, scale: scale ?? 1 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration,
+          delay,
+          ease: "expo.out",
+          scrollTrigger: { trigger: el, start, once: true },
+        },
+      );
+    });
+
+    mm.add("(prefers-reduced-motion: reduce)", () => {
+      gsap.set(el, { opacity: 1, y: 0, scale: 1 });
+    });
+
+    return () => mm.revert();
+  }, [y, scale, delay, duration, start]);
+
   return (
-    <motion.div
-      className={className}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
-      variants={makeVariants(y)}
-      transition={{ delay }}
+    <Tag
+      ref={ref}
+      data-reveal=""
+      className={cn("u-will-change", className)}
+      style={{ opacity: 0 }}
     >
       {children}
-    </motion.div>
+    </Tag>
   );
 }
 
 type StaggerProps = {
   children: ReactNode;
   className?: string;
-  stagger?: number;
+  /** intervalo entre os filhos — variado de propósito, nada de tudo igual */
+  each?: number;
+  y?: number;
+  start?: string;
+  as?: ElementType;
 };
 
-export const staggerContainer: Variants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.08 },
-  },
-};
+/**
+ * Anima os filhos marcados com [data-stagger-item] em cascata.
+ */
+export function Stagger({
+  children,
+  className,
+  each = 0.09,
+  y = 40,
+  start = "top 84%",
+  as: Tag = "div",
+}: StaggerProps) {
+  const ref = useRef<HTMLElement>(null);
 
-export function StaggerGroup({ children, className, stagger = 0.08 }: StaggerProps) {
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    const items = el.querySelectorAll<HTMLElement>("[data-stagger-item]");
+    if (!items.length) return;
+
+    const mm = gsap.matchMedia();
+
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      gsap.fromTo(
+        items,
+        { opacity: 0, y },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.05,
+          ease: "expo.out",
+          stagger: { each, from: "start" },
+          scrollTrigger: { trigger: el, start, once: true },
+        },
+      );
+    });
+
+    mm.add("(prefers-reduced-motion: reduce)", () => {
+      gsap.set(items, { opacity: 1, y: 0 });
+    });
+
+    return () => mm.revert();
+  }, [each, y, start]);
+
   return (
-    <motion.div
-      className={className}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      variants={{ hidden: {}, visible: { transition: { staggerChildren: stagger } } }}
-    >
+    <Tag ref={ref} className={className}>
       {children}
-    </motion.div>
+    </Tag>
   );
 }
 
-export const staggerItem: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
-  },
-};
-
-export function StaggerItem({ children, className }: { children: ReactNode; className?: string }) {
+/** Filho de <Stagger>. Nasce invisível; o CSS cobre no-JS e reduced-motion. */
+export function StaggerItem({
+  children,
+  className,
+  as: Tag = "div",
+}: {
+  children: ReactNode;
+  className?: string;
+  as?: ElementType;
+}) {
   return (
-    <motion.div className={className} variants={staggerItem}>
+    <Tag data-stagger-item="" className={cn("u-will-change", className)} style={{ opacity: 0 }}>
       {children}
-    </motion.div>
+    </Tag>
   );
 }

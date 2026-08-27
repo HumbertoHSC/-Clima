@@ -1,22 +1,17 @@
 import type { MetadataRoute } from "next";
+import { BUSINESS } from "@/lib/site";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "+Clima — Ar-condicionado em Tamandaré e Mata Sul de PE",
-    short_name: "+Clima",
+    name: BUSINESS.legalName,
+    short_name: BUSINESS.name,
     description:
-      "Instalação, manutenção e higienização de ar-condicionado em Tamandaré-PE e Mata Sul de Pernambuco.",
+      "Instalação, conserto e higienização de ar-condicionado em Tamandaré-PE e Mata Sul.",
     start_url: "/",
     display: "standalone",
-    background_color: "#fbf9f5",
-    theme_color: "#14335a",
+    background_color: "#0b0e13",
+    theme_color: "#0b0e13",
     lang: "pt-BR",
-    icons: [
-      {
-        src: "/brand/icon-navy.svg",
-        sizes: "any",
-        type: "image/svg+xml",
-      },
-    ],
+    icons: [{ src: "/icon.svg", sizes: "any", type: "image/svg+xml" }],
   };
 }

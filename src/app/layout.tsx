@@ -1,15 +1,19 @@
-import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Public_Sans } from "next/font/google";
-import { MotionProvider } from "@/components/MotionProvider";
+import type { Metadata, Viewport } from "next";
+import { Archivo, Public_Sans, JetBrains_Mono } from "next/font/google";
+import { BUSINESS, AREAS } from "@/lib/site";
+import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import "./globals.css";
 
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: "--font-plus-jakarta",
+/* Display: grotesca industrial com eixo de largura — expandida nos títulos,
+   condensada nos rótulos. Nada de Inter/Poppins. */
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
+  axes: ["wdth"],
   display: "swap",
 });
 
+/* Apoio: neutra, alta legibilidade em texto corrido. */
 const publicSans = Public_Sans({
   variable: "--font-public-sans",
   subsets: ["latin"],
@@ -17,111 +21,128 @@ const publicSans = Public_Sans({
   display: "swap",
 });
 
-const siteUrl = "https://www.maisclima.com.br";
+/* Técnica: etiquetas, índices e medidas. */
+const jetbrains = JetBrains_Mono({
+  variable: "--font-jetbrains",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: "+Clima | Manutenção e Instalação de Ar-Condicionado em Tamandaré e Mata Sul de PE",
+  metadataBase: new URL(BUSINESS.url),
+  title: {
+    default:
+      "+Clima Refrigeração | Conserto e instalação de ar-condicionado em Tamandaré-PE",
+    template: "%s | +Clima Refrigeração",
+  },
   description:
-    "+Clima realiza instalação, manutenção preventiva e corretiva, higienização e contratos de manutenção de ar-condicionado em Tamandaré-PE e Mata Sul de Pernambuco. Orçamento rápido pelo WhatsApp.",
+    "Ar-condicionado que parou de gelar? A +Clima atende no mesmo dia em Tamandaré e na Mata Sul de PE: instalação, conserto, manutenção preventiva, higienização e carga de gás. Orçamento fechado antes e 90 dias de garantia.",
   keywords: [
-    "ar condicionado Tamandaré",
-    "manutenção de ar condicionado PE",
-    "instalação de split",
-    "higienização ar condicionado",
-    "Mata Sul de Pernambuco",
+    "conserto de ar condicionado Tamandaré",
+    "instalação de split Tamandaré PE",
+    "manutenção de ar condicionado Mata Sul",
+    "higienização de ar condicionado Rio Formoso",
+    "carga de gás ar condicionado Barreiros",
+    "técnico de refrigeração Pernambuco",
   ],
-  alternates: { canonical: siteUrl },
+  authors: [{ name: BUSINESS.legalName }],
+  creator: BUSINESS.legalName,
+  alternates: { canonical: BUSINESS.url },
   openGraph: {
     type: "website",
     locale: "pt_BR",
-    title: "+Clima | Ar-condicionado com conforto que dá pra confiar",
+    url: BUSINESS.url,
+    siteName: BUSINESS.legalName,
+    title: "+Clima Refrigeração | Seu ar parou de gelar? A gente resolve hoje",
     description:
-      "Instalação, manutenção e higienização de ar-condicionado em Tamandaré-PE e Mata Sul de Pernambuco. Fale agora pelo WhatsApp.",
-    url: siteUrl,
-    siteName: "+Clima",
+      "Instalação, conserto e higienização de ar-condicionado em Tamandaré-PE e Mata Sul. Atendimento no mesmo dia, preço fechado antes e 90 dias de garantia.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "+Clima | Ar-condicionado com conforto que dá pra confiar",
+    title: "+Clima Refrigeração | Ar-condicionado em Tamandaré-PE",
     description:
-      "Instalação, manutenção e higienização de ar-condicionado em Tamandaré-PE e Mata Sul de Pernambuco.",
+      "Conserto, instalação e higienização com atendimento no mesmo dia na Mata Sul de Pernambuco.",
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
   },
-  // verification: { google: "SUBSTITUA-PELO-CODIGO-DO-GOOGLE-SEARCH-CONSOLE" },
-  icons: {
-    icon: "/brand/icon-navy.svg",
-  },
+  category: "business",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0b0e13",
+  colorScheme: "dark",
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "HVACBusiness",
-  "@id": `${siteUrl}/#business`,
-  name: "+Clima",
-  url: siteUrl,
-  image: `${siteUrl}/brand/logo-horizontal.svg`,
-  logo: `${siteUrl}/brand/logo-horizontal.svg`,
+  "@id": `${BUSINESS.url}/#business`,
+  name: BUSINESS.legalName,
+  alternateName: BUSINESS.name,
+  url: BUSINESS.url,
+  image: `${BUSINESS.url}/brand/selo.jpg`,
   description:
-    "Instalação, manutenção preventiva e corretiva, higienização e contratos de manutenção de ar-condicionado.",
-  // TODO: endereço e coordenadas são placeholders — substituir pelos dados reais do negócio.
+    "Instalação, conserto, manutenção preventiva, higienização e carga de gás de ar-condicionado em Tamandaré-PE e Mata Sul de Pernambuco.",
+  telephone: BUSINESS.phoneRaw,
+  // Endereço completo omitido de propósito: só entra quando o cliente confirmar
+  // rua e número reais. Localidade e área de atuação já são verdadeiras.
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Rua Example, 123 – Centro",
-    addressLocality: "Tamandaré",
-    addressRegion: "PE",
+    addressLocality: BUSINESS.city,
+    addressRegion: BUSINESS.state,
     addressCountry: "BR",
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: -8.7591,
-    longitude: -35.1039,
+    latitude: BUSINESS.coords.lat,
+    longitude: BUSINESS.coords.lng,
   },
-  areaServed: [
-    "Tamandaré-PE",
-    "Rio Formoso-PE",
-    "Barreiros-PE",
-    "Sirinhaém-PE",
-    "Água Preta-PE",
-    "Mata Sul de Pernambuco",
+  areaServed: AREAS.map((area) => ({
+    "@type": "City",
+    name: `${area} - PE`,
+  })),
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      opens: "08:00",
+      closes: "19:00",
+    },
   ],
-  telephone: "+55-81-7302-3718",
   priceRange: "$$",
-  openingHoursSpecification: {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-    opens: "08:00",
-    closes: "19:00",
-  },
+  sameAs: [BUSINESS.instagram],
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" className={`${plusJakarta.variable} ${publicSans.variable}`}>
+    <html
+      lang="pt-BR"
+      className={`${archivo.variable} ${publicSans.variable} ${jetbrains.variable}`}
+    >
       <head>
+        {/* Sem JS, nada do que depende do reveal pode ficar invisível. */}
+        <noscript>
+          <style>{`[data-reveal],[data-stagger-item],[data-step]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
+      </head>
+      <body className="min-h-screen overflow-x-hidden antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-      </head>
-      <body className="min-h-screen overflow-x-hidden antialiased">
         <a
           href="#conteudo"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-0 focus:top-0 focus:z-[999] focus:rounded-br-lg focus:bg-navy focus:px-4 focus:py-2.5 focus:text-white"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:bg-ice focus:px-4 focus:py-2.5 focus:text-ink"
         >
           Pular para o conteúdo
         </a>
-        <MotionProvider>{children}</MotionProvider>
+        <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   );

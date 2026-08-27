@@ -1,106 +1,244 @@
 @import "tailwindcss";
 
-:root {
-  /* Brand */
-  --color-navy: #14335a;
-  --color-navy-dark: #0d2440;
-  --color-navy-mid: #2c5680;
-  --color-blue: #4f7fa8;
-  --color-ice: #eef6fa;
-  --color-ice-border: #d7e8ef;
-  --color-accent: #e08c5b; /* decorative accent — do not pair with white text (contrast 2.6:1) */
-  --color-cta: #a3501f; /* accessible accent for solid buttons/badges with white text (contrast 5.6:1) */
-  --color-bg: #fbf9f5;
-  --color-card-border: #eee7d9;
-  --color-text: #1c2b3a;
-  --color-text-soft: #59707f;
-  --color-text-softer: #7c8fa0;
-  --color-whatsapp: #25d366;
+/* ============================================================
+   +Clima — sistema de design
+   Base: grafite/antracite. Frio: azul-gelo saturado (uso pontual).
+   Contraponto quente: laranja queimado (calor resolvido).
+   ============================================================ */
 
-  /* Supporting tones (consolidated from repeated one-off hex values) */
-  --color-header-border: #e7e1d6;
-  --color-outline: #c7d6e0;
-  --color-ink-soft: #3d5468;
-  --color-ink-pale: #bcd0e0;
-  --color-sky: #bfe0ee;
-  --color-sky-deep: #9dc8dd;
-  --color-slate: #4a6070;
-  --color-quote: #2d4054;
-  --color-input-bg: #fbfcfd;
-  --color-input-border: #dfe6ea;
-  --color-footer-text: #93a8bc;
-  --color-footer-text-dim: #6c8299;
-  --color-social-icon: #cfe0ec;
-  --color-success: #1e8a52;
-  --color-error: #c0392b;
+@theme {
+  /* --- superfícies --- */
+  --color-void: #07090c;
+  --color-ink: #0b0e13;
+  --color-ink-2: #10141b;
+  --color-ink-3: #161c25;
+  --color-ink-4: #1e2732;
+
+  /* --- metal / traço técnico --- */
+  --color-steel: #2a3542;
+  --color-steel-2: #3d4b5c;
+  --color-fog: #8fa0b3;
+  --color-chalk: #dfe6ee;
+  --color-white-warm: #f4f6f8;
+
+  /* --- papel (seções claras) --- */
+  --color-paper: #e8e6e1;
+  --color-paper-2: #d8d6cf;
+
+  /* --- frio --- */
+  --color-ice: #63d9f7;
+  --color-ice-deep: #17a9d6;
+  --color-ice-dark: #0b5f7d;
+
+  /* --- calor --- */
+  --color-ember: #e2551f;
+  --color-ember-hot: #ff7a33;
+  --color-ember-dim: #7d2f14;
+
+  /* --- tipografia --- */
+  --font-display: var(--font-archivo), "Arial Narrow", system-ui, sans-serif;
+  --font-body: var(--font-public-sans), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", monospace;
+
+  /* --- curvas --- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+  /* --- traço --- */
+  --radius-sharp: 2px;
 }
 
-@theme inline {
-  --color-navy: var(--color-navy);
-  --color-navy-dark: var(--color-navy-dark);
-  --color-navy-mid: var(--color-navy-mid);
-  --color-blue: var(--color-blue);
-  --color-ice: var(--color-ice);
-  --color-ice-border: var(--color-ice-border);
-  --color-accent: var(--color-accent);
-  --color-cta: var(--color-cta);
-  --color-bg: var(--color-bg);
-  --color-card-border: var(--color-card-border);
-  --color-text: var(--color-text);
-  --color-text-soft: var(--color-text-soft);
-  --color-text-softer: var(--color-text-softer);
-  --color-whatsapp: var(--color-whatsapp);
-
-  --color-header-border: var(--color-header-border);
-  --color-outline: var(--color-outline);
-  --color-ink-soft: var(--color-ink-soft);
-  --color-ink-pale: var(--color-ink-pale);
-  --color-sky: var(--color-sky);
-  --color-sky-deep: var(--color-sky-deep);
-  --color-slate: var(--color-slate);
-  --color-quote: var(--color-quote);
-  --color-input-bg: var(--color-input-bg);
-  --color-input-border: var(--color-input-border);
-  --color-footer-text: var(--color-footer-text);
-  --color-footer-text-dim: var(--color-footer-text-dim);
-  --color-social-icon: var(--color-social-icon);
-  --color-success: var(--color-success);
-  --color-error: var(--color-error);
-
-  --font-head: var(--font-plus-jakarta);
-  --font-body: var(--font-public-sans);
-}
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 84px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+@layer base {
+  * {
+    border-color: var(--color-steel);
   }
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-chalk);
+    font-family: var(--font-body);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-ember);
+    color: var(--color-white-warm);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ice);
+    outline-offset: 3px;
+  }
+
+  /* o Lenis controla a rolagem; sem scroll-behavior nativo concorrente */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
     scroll-behavior: auto !important;
   }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
 }
 
-body {
-  background: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-body);
+@layer utilities {
+  /* Tipografia de display — Archivo em largura expandida (eixo wdth) */
+  .u-expanded {
+    font-family: var(--font-display);
+    font-variation-settings: "wdth" 112;
+  }
+  .u-condensed {
+    font-family: var(--font-display);
+    font-variation-settings: "wdth" 82;
+  }
+
+  /* Etiqueta técnica monoespaçada */
+  .u-tag {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* Ruído de filme — sobreposto, não animado em telas pequenas */
+  .u-noise::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.045;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Grid técnico de fundo (blueprint) */
+  .u-blueprint {
+    background-image: linear-gradient(
+        to right,
+        color-mix(in srgb, var(--color-steel) 55%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--color-steel) 55%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 72px 72px;
+  }
+
+  .u-blueprint-fine {
+    background-image: linear-gradient(
+        to right,
+        color-mix(in srgb, var(--color-steel) 30%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--color-steel) 30%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 18px 18px;
+  }
+
+  /* Grelha de ventilação — lâminas horizontais */
+  .u-grille {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color-chalk) 12%, transparent) 0px,
+      color-mix(in srgb, var(--color-chalk) 12%, transparent) 1px,
+      transparent 1px,
+      transparent 7px
+    );
+  }
+
+  /* Fio de metal — divisor de 1px com brilho */
+  .u-hairline {
+    background: linear-gradient(
+      to right,
+      transparent,
+      color-mix(in srgb, var(--color-steel-2) 90%, transparent) 18%,
+      color-mix(in srgb, var(--color-steel-2) 90%, transparent) 82%,
+      transparent
+    );
+  }
+
+  /* Duotone frio aplicado às fotos */
+  .u-duotone {
+    filter: grayscale(1) contrast(1.12) brightness(0.86);
+  }
+
+  /* Máscara de revelação usada pelo GSAP (clip-path) */
+  .u-clip-hidden {
+    clip-path: inset(0 0 100% 0);
+  }
+
+  .u-stroke-text {
+    -webkit-text-stroke: 1px color-mix(in srgb, var(--color-fog) 45%, transparent);
+    color: transparent;
+  }
+
+  .u-will-change {
+    will-change: transform, opacity;
+  }
 }
 
-.font-head {
-  font-family: var(--font-head);
+/* Respeita a preferência do sistema: sem movimento supérfluo */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .u-clip-hidden {
+    clip-path: none !important;
+  }
 }
 
-/* Visible, on-brand focus ring for keyboard navigation (WCAG 2.4.7) */
-:focus-visible {
-  outline: 2px solid var(--color-blue);
-  outline-offset: 2px;
-  border-radius: 4px;
+/* ------------------------------------------------------------------
+   Animações declaradas em CSS (as demais vivem no GSAP/Framer)
+   ------------------------------------------------------------------ */
+@keyframes scrollhint {
+  0% {
+    transform: translateY(-110%);
+  }
+  60%,
+  100% {
+    transform: translateY(340%);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Rede de segurança: elementos que nascem invisíveis para o reveal
+   precisam aparecer quando o JS não roda ou quando o sistema pede
+   menos movimento.
+   ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  [data-stagger-item],
+  [data-step] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

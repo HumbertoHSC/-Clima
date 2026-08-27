@@ -1,11 +1,10 @@
 import type { MetadataRoute } from "next";
-
-const siteUrl = "https://www.maisclima.com.br";
+import { BUSINESS } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: siteUrl,
+      url: BUSINESS.url,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,
