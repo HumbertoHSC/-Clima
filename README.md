@@ -134,10 +134,10 @@ nome, telefone e horário daqui, e reunir avaliações reais de clientes. Isso n
 
 1. Conferir o `@` do Instagram em `BUSINESS.instagram` (`src/lib/site.ts`).
 2. Apontar o DNS de `maisclimatamandare.com.br` para o projeto na Vercel.
-3. Preencher rua e número no JSON-LD de `src/app/layout.tsx` — hoje só constam
-   cidade, estado e área de atuação, para não publicar endereço inventado.
-   Sem rua e número, o Google tem menos confiança para mostrar o negócio no
-   mapa local.
+3. Preencher rua e número em `BUSINESS.postalCode`/JSON-LD (`src/lib/site.ts` e
+   `src/app/layout.tsx`) — hoje o endereço tem CEP (55578-000), cidade e
+   estado reais, mas sem rua e número, para não publicar algo inventado. Sem
+   isso o Google tem menos confiança para mostrar o negócio no mapa local.
 4. Substituir as fotos da galeria pelas reais.
 5. Confirmar as condições da promoção em `PROMO` (aparelhos cobertos, limite de
    BTU, se o valor muda fora de Tamandaré).

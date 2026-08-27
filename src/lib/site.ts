@@ -14,6 +14,7 @@ export const BUSINESS = {
   email: "contato@maisclimatamandare.com.br",
   city: "Tamandaré",
   state: "PE",
+  postalCode: "55578-000",
   base: "Tamandaré – PE",
   hours: "Segunda a sábado, das 8h às 19h",
   hoursShort: "Seg–Sáb · 8h–19h",
