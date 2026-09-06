@@ -70,6 +70,9 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
   },
   category: "business",
+  verification: {
+    google: "8N1zM5-4FTqCyBGlMeSnhKxeEUMFjMF_42axsnvYGMU",
+  },
 };
 
 export const viewport: Viewport = {
