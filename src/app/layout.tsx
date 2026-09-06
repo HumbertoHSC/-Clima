@@ -73,6 +73,11 @@ export const metadata: Metadata = {
   verification: {
     google: "8N1zM5-4FTqCyBGlMeSnhKxeEUMFjMF_42axsnvYGMU",
   },
+  icons: {
+    icon: [{ url: "/brand/selo.jpg", sizes: "600x600", type: "image/jpeg" }],
+    shortcut: "/brand/selo.jpg",
+    apple: "/brand/selo.jpg",
+  },
 };
 
 export const viewport: Viewport = {

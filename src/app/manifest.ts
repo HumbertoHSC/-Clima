@@ -12,6 +12,6 @@ export default function manifest(): MetadataRoute.Manifest {
     background_color: "#0b0e13",
     theme_color: "#0b0e13",
     lang: "pt-BR",
-    icons: [{ src: "/icon.svg", sizes: "any", type: "image/svg+xml" }],
+    icons: [{ src: "/brand/selo.jpg", sizes: "600x600", type: "image/jpeg" }],
   };
 }
