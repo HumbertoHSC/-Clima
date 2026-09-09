@@ -19,7 +19,7 @@ export const BUSINESS = {
   base: "Tamandaré – PE",
   hours: "Segunda a sábado, das 8h às 19h",
   hoursShort: "Seg–Sáb · 8h–19h",
-  instagram: "https://instagram.com/maisclimarefrigeracao",
+  instagram: "https://instagram.com/mais_clima",
   coords: { lat: -8.7591, lng: -35.1039 },
 } as const;
 
