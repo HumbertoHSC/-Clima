@@ -193,18 +193,18 @@ export const STATS = [
 export const GALLERY = [
   {
     id: "higienizacao",
-    src: "/images/unidade.jpg",
-    title: "Higienização de evaporadora",
+    src: "/images/ar-2.jpeg",
+    title: "Abertura e revisão de filtros",
     place: "Tamandaré – PE",
-    detail: "Split hi-wall com cheiro de mofo: turbina, serpentina e bandeja lavadas com bactericida.",
+    detail: "Evaporadora aberta para limpeza de filtros e checagem da fiação interna antes de fechar o gabinete.",
     span: "wide" as const,
   },
   {
     id: "instalacao",
-    src: "/images/tecnico.jpg",
-    title: "Instalação de split 18.000 BTU",
-    place: "Rio Formoso – PE",
-    detail: "Tubulação nova de cobre, vácuo na linha e acabamento em canaleta branca.",
+    src: "/images/ar-1.jpeg",
+    title: "Instalação de split inverter",
+    place: "Tamandaré – PE",
+    detail: "Evaporadora nova instalada e nivelada, pronta para puxada de vácuo e carga de gás.",
     span: "tall" as const,
   },
   {
@@ -217,10 +217,10 @@ export const GALLERY = [
   },
   {
     id: "fluxo",
-    src: "/images/fluxo.jpg",
-    title: "Teste de insuflamento",
-    place: "Sirinhaém – PE",
-    detail: "Temperatura de saída medida na entrega do serviço, com o cliente presente.",
+    src: "/images/ar-3.jpeg",
+    title: "Instalação de unidade externa",
+    place: "Tamandaré – PE",
+    detail: "Condensadora R32 fixada em suporte reforçado, com tubulação e dreno finalizados.",
     span: "normal" as const,
   },
 ] as const;

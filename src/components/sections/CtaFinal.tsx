@@ -1,10 +1,8 @@
-import Image from "next/image";
 import { BUSINESS, AREAS, PROMO, SERVICES } from "@/lib/site";
 import { waLink, MESSAGES } from "@/lib/whatsapp";
 import { Reveal } from "@/components/motion/Reveal";
-import { Parallax } from "@/components/motion/Parallax";
 import { MagneticButton } from "@/components/ui/MagneticButton";
-import { IconArrow, IconWhatsApp, IconGrille } from "@/components/ui/Icons";
+import { IconArrow } from "@/components/ui/Icons";
 
 /**
  * Fechamento da página: sem formulário — o chamado sai direto pelo WhatsApp
@@ -96,31 +94,6 @@ export function CtaFinal() {
         {/* ------------ atalhos por serviço ------------ */}
         <div className="lg:col-span-5 lg:col-start-8">
           <Reveal y={40}>
-            <div className="relative aspect-[4/3] overflow-hidden border border-steel-2/70">
-              <Parallax amount={10} className="absolute inset-0">
-                <Image
-                  src="/images/fluxo.jpg"
-                  alt="Ar frio saindo da grelha de uma evaporadora após a limpeza"
-                  fill
-                  loading="lazy"
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="scale-[1.25] object-cover object-[58%_22%] saturate-[0.5] contrast-[1.1]"
-                />
-              </Parallax>
-              <span className="pointer-events-none absolute inset-0 bg-ice-dark/35 mix-blend-color" />
-              <span className="pointer-events-none absolute inset-0 bg-linear-to-t from-ink-2 via-transparent to-transparent" />
-              <span className="u-grille pointer-events-none absolute inset-0 opacity-15" />
-              <span className="absolute bottom-5 left-5 flex items-center gap-3">
-                <IconWhatsApp className="h-5 w-5 text-ice" />
-                <span className="u-tag text-white-warm/90">
-                  Resposta em minutos
-                </span>
-              </span>
-              <IconGrille className="absolute right-5 top-5 h-5 w-16 text-white-warm/45" />
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.1} className="mt-4">
             <span className="u-tag mb-3 block text-fog">
               Já sabe o que precisa? Chame direto:
             </span>
